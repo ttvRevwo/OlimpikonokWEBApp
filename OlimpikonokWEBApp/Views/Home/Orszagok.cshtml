@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "OlimpikonokWEBApp";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Országok</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Főváros</th>
+				<th>Népesség</th>
+				<th>Módosítás</th>
+				<th>Törlés</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Orszag orszag in Model)
+			{
+				<tr>
+					<td>@orszag.Nev</td>
+					<td>@orszag.Fovaros</td>
+					<td>@orszag.Nepesseg</td>
+					<td><img src="/images/pen.svg" /></td>
+					<td><img src="/images/trash.svg" /></td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>                                                

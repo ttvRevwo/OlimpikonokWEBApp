@@ -18,11 +18,20 @@ namespace OlimpikonokWEBApp.Controllers
             return View();
         }
 
+        public IActionResult GetOrszagok()
+        {
+            return View(new OrszagController().GetOrszagok());
+        }
+
         public IActionResult Sportolok()
         {
             return View(new SportoloController().GetSportolok());
         }
 
+        public IActionResult SportoloKep(int id)
+        {
+            return View(new SportoloController().GetSportoloById(id));
+        }
         public IActionResult Privacy()
         {
             return View();

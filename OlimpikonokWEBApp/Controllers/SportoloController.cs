@@ -26,5 +26,28 @@ namespace OlimpikonokWEBApp.Controllers
                 }
             }
         }
+
+        public Sportolo GetSportoloById(int id)
+        {
+            using (var context = new OlimpikonokContext())
+            {
+                try
+                {
+                    Sportolo sportolo = context.Sportolos.FirstOrDefault(s => s.Id == id);
+                    return sportolo;
+                }
+                catch (Exception ex)
+                {
+                    Sportolo hiba = new Sportolo()
+                    {
+                        Id = 0,
+                        Nev = "Hiba az adatbázis elérésekor!" + ex.Message
+                    };
+                    return hiba;
+                }
+            }
+        }
+
+
     }
 }

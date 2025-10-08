@@ -14,7 +14,7 @@
 				<th>Érmek száma</th>
 				<th>IndexKép</th>
 				<th>Módosítás</th>
-				<th>TÖrlés</th>
+				<th>Törlés</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +27,7 @@
 					<td>@sportolo.SzulDatum</td>
 					<td>@sportolo.Sportag</td>
 					<td>@sportolo.Ermek</td>
-					<td><img src="@Program.ImageConverter(@sportolo.IndexKep)" style="height: 50px;"/></td>
+					<td><a asp-area="" asp-controller="Home" asp-action="SportoloKep" asp-route-id="@sportolo.Id"><img src="@Program.ImageConverter(@sportolo.IndexKep)" style="height: 50px;" /></a></td>
 					<td><img src="/images/pen.svg" /></td>
 					<td><img src="/images/trash.svg" /></td>
 				</tr>

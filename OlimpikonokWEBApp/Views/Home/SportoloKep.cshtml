@@ -3,12 +3,5 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Sportoló képek</h1>
-	@foreach (Sportolo sportolo in Model)
-	{
-		<tr>
-			<td><img src="@Program.ImageConverter(@sportolo.IndexKep)" style="height: 50px;" /></td>
-
-		</tr>
-	}
+	<img src="@Program.ImageConverter((Model as Sportolo).IndexKep)" alt="Tárolt kép" class="img-fluid" />
 </div>                                                
