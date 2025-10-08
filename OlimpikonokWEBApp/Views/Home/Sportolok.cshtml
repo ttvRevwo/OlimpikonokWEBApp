@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "OlimpikonokWEBApp";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Sportolók</h1>
+    <table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Neme</th>
+				<th>Születési dátum</th>
+				<th>Sportág</th>
+				<th>Érmek száma</th>
+				<th>IndexKép</th>
+				<th>Módosítás</th>
+				<th>TÖrlés</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Sportolo sportolo in Model)
+			{
+				string nem = sportolo.Neme ? "férfi" : "nő";
+				<tr>
+					<td>@sportolo.Nev</td>
+					<td>@nem</td>
+					<td>@sportolo.SzulDatum</td>
+					<td>@sportolo.Sportag</td>
+					<td>@sportolo.Ermek</td>
+					<td><img src="@Program.ImageConverter(@sportolo.IndexKep)" style="height: 50px;"/></td>
+					<td><img src="/images/pen.svg" /></td>
+					<td><img src="/images/trash.svg" /></td>
+				</tr>
+			}
+		</tbody>
+    </table>
+</div>                                                
