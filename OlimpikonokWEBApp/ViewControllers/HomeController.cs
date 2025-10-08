@@ -18,7 +18,7 @@ namespace OlimpikonokWEBApp.Controllers
             return View();
         }
 
-        public IActionResult GetOrszagok()
+        public IActionResult Orszagok()
         {
             return View(new OrszagController().GetOrszagok());
         }
