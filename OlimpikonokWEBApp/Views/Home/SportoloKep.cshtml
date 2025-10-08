@@ -1,7 +1,8 @@
-﻿@{
+﻿@using OlimpikonokWEBApp.DTOs
+@{
     ViewData["Title"] = "OlimpikonokWEBApp";
 }
 
 <div class="text-center">
-	<img src="@Program.ImageConverter((Model as Sportolo).IndexKep)" alt="Tárolt kép" class="img-fluid" />
+	<img src="@Program.ImageConverter((Model as SportoloDTO).Kep)" alt="Tárolt kép" class="img-fluid" />
 </div>                                                

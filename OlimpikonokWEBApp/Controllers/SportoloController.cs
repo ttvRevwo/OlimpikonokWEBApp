@@ -1,5 +1,6 @@
 ﻿using OlimpikonokWEBApp.Models;
 using Microsoft.EntityFrameworkCore;
+using OlimpikonokWEBApp.DTOs;
 
 namespace OlimpikonokWEBApp.Controllers
 {
@@ -39,6 +40,33 @@ namespace OlimpikonokWEBApp.Controllers
                 catch (Exception ex)
                 {
                     Sportolo hiba = new Sportolo()
+                    {
+                        Id = 0,
+                        Nev = "Hiba az adatbázis elérésekor!" + ex.Message
+                    };
+                    return hiba;
+                }
+            }
+        }
+
+        public SportoloDTO GetSportoloDTOId(int id)
+        {
+            using (var context = new OlimpikonokContext())
+            {
+                try
+                {
+                    Sportolo sportolo = context.Sportolos.FirstOrDefault(s => s.Id == id);
+                    SportoloDTO sportoloDTO = new SportoloDTO()
+                    {
+                        Id = sportolo.Id,
+                        Nev = sportolo.Nev,
+                        Kep = sportolo.Kep
+                    };
+                    return sportoloDTO;
+                }
+                catch (Exception ex)
+                {
+                    SportoloDTO hiba = new SportoloDTO()
                     {
                         Id = 0,
                         Nev = "Hiba az adatbázis elérésekor!" + ex.Message

@@ -30,7 +30,7 @@ namespace OlimpikonokWEBApp.Controllers
 
         public IActionResult SportoloKep(int id)
         {
-            return View(new SportoloController().GetSportoloById(id));
+            return View(new SportoloController().GetSportoloDTOId(id));
         }
         public IActionResult Privacy()
         {
