@@ -12,70 +12,86 @@ namespace OlimpikonokWEBApp.Controllers
             {
                 try
                 {
-                    List<Sportolo> sportolok = context.Sportolos.Include(s => s.Sportag).ToList();
-                    return sportolok;
+                    return context.Sportolos.Include(s => s.Sportag).ToList();
                 }
                 catch (Exception ex)
                 {
-                    List<Sportolo> hiba = new List<Sportolo>();
-                    Sportolo uj = new Sportolo()
+                    List<Sportolo> hibaLista = new List<Sportolo>();
+                    hibaLista.Add(new Sportolo
                     {
                         Id = 0,
                         Nev = "Hiba az adatbázis elérésekor!" + ex.Message
-                    };
-                    return hiba;
+                    });
+                    return hibaLista;
                 }
             }
         }
 
-        public Sportolo GetSportoloById(int id)
+        public SportoloDTO GetSportoloDTOById(int id)
         {
             using (var context = new OlimpikonokContext())
             {
                 try
                 {
-                    Sportolo sportolo = context.Sportolos.FirstOrDefault(s => s.Id == id);
-                    return sportolo;
+                    var sportolo = context.Sportolos.FirstOrDefault(s => s.Id == id);
+                    if(sportolo != null)
+                    {
+                        return new SportoloDTO
+                        {
+                            Id = sportolo.Id,
+                            Kep = sportolo.Kep
+                        };
+                    }
+                    else
+                    {
+                        return new SportoloDTO
+                        {
+                            Id = 0,
+                            Kep = Array.Empty<byte>()
+                        };
+                    }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
-                    Sportolo hiba = new Sportolo()
+                    return new SportoloDTO
                     {
                         Id = 0,
-                        Nev = "Hiba az adatbázis elérésekor!" + ex.Message
+                        Kep = Array.Empty<byte>()
                     };
-                    return hiba;
                 }
             }
         }
 
-        public SportoloDTO GetSportoloDTOId(int id)
+        public string PutSportolo(Sportolo modositSportolo)
         {
             using (var context = new OlimpikonokContext())
             {
                 try
                 {
-                    Sportolo sportolo = context.Sportolos.FirstOrDefault(s => s.Id == id);
-                    SportoloDTO sportoloDTO = new SportoloDTO()
+                    if(modositSportolo != null)
                     {
-                        Id = sportolo.Id,
-                        Nev = sportolo.Nev,
-                        Kep = sportolo.Kep
-                    };
-                    return sportoloDTO;
+                        Sportolo letezo = context.Sportolos.FirstOrDefault(s => s.Id == modositSportolo.Id);
+                        if(letezo != null)
+                        {
+                            context.Sportolos.Update(modositSportolo);
+                            //context.SaveChanges();
+                            return "Sikeresen módosítattuk az adatokat!";
+                        }
+                        else
+                        {
+                            return $"Nincs ilyen sportoló! {modositSportolo.Id}";
+                        }
+                    }
+                    else
+                    {
+                        return "Üres objektumot kaptam, nem lehet módosítani!";
+                    }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
-                    SportoloDTO hiba = new SportoloDTO()
-                    {
-                        Id = 0,
-                        Nev = "Hiba az adatbázis elérésekor!" + ex.Message
-                    };
-                    return hiba;
+                    return $"Nem sikerült a módosítás\n{ex.Message}";
                 }
             }
         }
-
-
     }
 }

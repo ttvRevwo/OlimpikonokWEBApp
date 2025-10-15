@@ -23,7 +23,12 @@ public partial class Sportolo
 
     public byte[] Kep { get; set; } = null!;
 
-    public virtual Orszag Orszag { get; set; } = null!;
+    public virtual Orszag? Orszag { get; set; } = null!;
 
-    public virtual Sportag Sportag { get; set; } = null!;
+    public virtual Sportag? Sportag { get; set; } = null!;
+
+    public override string ToString()
+    {
+        return $"{Id} - {Nev} - {Neme} {SzulDatum.ToString()} - {OrszagId} - {Ermek} - ";
+    }
 }
